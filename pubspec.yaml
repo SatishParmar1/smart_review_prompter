@@ -1,5 +1,5 @@
 name: smart_review_prompter
-description: "A new Flutter package project."
+description: A smart way to show in-app review prompts based on user engagement, such as app open count and days since install.
 version: 0.0.1
 homepage: https://github.com/SatishParmar1/smart_review_prompter
 repository: https://github.com/SatishParmar1/smart_review_prompter
