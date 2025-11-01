@@ -1,7 +1,8 @@
 name: smart_review_prompter
 description: "A new Flutter package project."
 version: 0.0.1
-homepage:
+homepage: https://github.com/SatishParmar1/smart_review_prompter
+repository: https://github.com/SatishParmar1/smart_review_prompter
 
 environment:
   sdk: ^3.9.0
