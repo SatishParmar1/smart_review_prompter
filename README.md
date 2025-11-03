@@ -27,7 +27,7 @@ Asking users for reviews at the right time significantly increases the chances o
 Add this to your `pubspec.yaml`:
 ```yaml
 dependencies:
-  smart_review_prompter: ^0.0.1
+  smart_review_prompter: ^0.0.2
 ```
 
 Then run:

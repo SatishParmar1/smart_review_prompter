@@ -19,10 +19,7 @@ class SmartReviewConditions {
   /// The minimum number of days that must pass since first install.
   final int minDaysSinceInstall;
 
-  SmartReviewConditions({
-    this.minAppOpens = 5,
-    this.minDaysSinceInstall = 3,
-  });
+  SmartReviewConditions({this.minAppOpens = 5, this.minDaysSinceInstall = 3});
 }
 
 /// The main class for the Smart Review Prompter.
@@ -43,7 +40,9 @@ class SmartReviewPrompter {
     // Check if this is the first time we're running this
     if (_prefs.getString(_StorageKeys.firstInstallDate) == null) {
       await _prefs.setString(
-          _StorageKeys.firstInstallDate, DateTime.now().toIso8601String());
+        _StorageKeys.firstInstallDate,
+        DateTime.now().toIso8601String(),
+      );
     }
   }
 
@@ -68,21 +67,28 @@ class SmartReviewPrompter {
 
       // 2. Check the conditions
       final int appOpenCount = _prefs.getInt(_StorageKeys.appOpenCount) ?? 0;
-      final String? installDateString =
-      _prefs.getString(_StorageKeys.firstInstallDate);
+      final String? installDateString = _prefs.getString(
+        _StorageKeys.firstInstallDate,
+      );
 
       final DateTime installDate = installDateString != null
           ? DateTime.parse(installDateString)
           : DateTime.now();
-      final int daysSinceInstall = DateTime.now().difference(installDate).inDays;
+      final int daysSinceInstall = DateTime.now()
+          .difference(installDate)
+          .inDays;
 
       final bool appOpensMet = appOpenCount >= conditions.minAppOpens;
       final bool daysMet = daysSinceInstall >= conditions.minDaysSinceInstall;
 
-      debugPrint('SmartReviewPrompter: Checking conditions... App Opens: $appOpenCount/${conditions.minAppOpens}. Days: $daysSinceInstall/${conditions.minDaysSinceInstall}');
+      debugPrint(
+        'SmartReviewPrompter: Checking conditions... App Opens: $appOpenCount/${conditions.minAppOpens}. Days: $daysSinceInstall/${conditions.minDaysSinceInstall}',
+      );
 
       if (appOpensMet && daysMet) {
-        debugPrint('SmartReviewPrompter: Conditions met, attempting to show review...');
+        debugPrint(
+          'SmartReviewPrompter: Conditions met, attempting to show review...',
+        );
         // 3. All conditions met. Let's ask!
         if (await _inAppReview.isAvailable()) {
           await _inAppReview.requestReview();
